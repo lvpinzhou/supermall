@@ -18,11 +18,16 @@ export default {
     mounted() {
         setTimeout(function(){
             this.scroll = new BScroll(document.querySelector('.wapp'), {
-                observeImage: true,
-                ObserveDom:true,
                 click:true
         })
         },5000);
+
+        // this.scroll.scrollTo(0,0)
+    },
+    methods: {
+        scrollTo(x,y){
+            this.scroll.scrollTo(0,0)
+        }
     }
 }
 </script>

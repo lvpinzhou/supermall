@@ -3,13 +3,14 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
         <HomeSwiper :banners="banners" />
         <recommend-view :recommends="recommends" />
         <feature-view />
         <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabClick="tabClick" />
         <good-list :goods="showGoods" />
     </scroll>  
+    <back-top v-on:click.native="backClick"/>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import NavBar from "components/common/navbar/NavBar";
 import Scroll from "components/common/scroll/Scroll";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodList from "components/content/goods/GoodsList";
+import BackTop from "components/content/backTop/BackTop"
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -35,7 +37,8 @@ export default {
     FeatureView,
     TabControl,
     GoodList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -84,6 +87,12 @@ export default {
           break;
       }
     },
+    backClick() {
+        // this.$refs.scroll.scrollTo()
+        // console.log(this.$refs.scroll.scroll.scrollTo())
+        // console.log(this.$refs.scroll.scroll)
+        console.log(this.$refs.scroll)
+    },
     /**
      * 网络请求相关方法
      */
@@ -112,6 +121,7 @@ export default {
 #home {
   padding-top: 44px;
   height: 100vh;
+  position: relative;
 }
 .home-nav {
   background-color: var(--color-tint);
@@ -128,7 +138,15 @@ export default {
   z-index: 9;
 }
 .content {
-    height: calc(100% - 93px);
     overflow: hidden;
+    position: absolute;
+    top:44px;
+    bottom: 49px;
+    right: 0;
+    left: 0;
 }
+/* .content {
+    height: calc(100% - 44px);
+    overflow: hidden;
+} */
 </style>
